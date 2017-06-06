@@ -1,5 +1,5 @@
 function Ralph(){
-  this.row = 3;
+  this.column = 3;
 
   this.createRalphSpace = function(){
     var ralphSpace = "";
@@ -13,12 +13,10 @@ function Ralph(){
 
   this.moveRalph = function(){
     var random = Math.floor(Math.random()*2);
-      if(random && this.row > 0){
-        this.row--;
-        this.wreck();
-      } else if(!random && this.row < 4){
-        this.row++;
-        this.wreck();
+      if(random && this.column > 0){
+        this.column--;
+      } else if(!random && this.column < 4){
+        this.column++;
       }else{
         this.moveRalph();
       }

@@ -12,6 +12,18 @@ function Building(){
   };
 
 
+  this.selectWindow = function(column){
+    var random = Math.floor(Math.random()*4);
+    for(i=0; i < this.windows.length; i++){
+      if(this.windows[i].column == column && this.windows[i].row == random){
+        this.windows[i].receiveDamage();
+
+      }
+    }
+  };
+
+
+
 }
 
 

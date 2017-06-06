@@ -22,10 +22,17 @@ function Game(options){
 
   this.update = function(totalByMove){
     this.printRalphWrecking();
+    this.printBuilding();
+
+    this.building.selectWindow(this.ralph.column);
+
     var self = this;
     setTimeout(function(){
       self.printRalph();
     },400);
+
+
+
   };
 
 
@@ -36,7 +43,7 @@ function Game(options){
     $('.ralphbox').each(function(){
       $(this).removeClass("ralph");
       $(this).removeClass("ralph-wrecking");
-      if($(this).attr("data-column") == self.ralph.row){
+      if($(this).attr("data-column") == self.ralph.column){
 
         $(this).addClass("ralph");
       }
@@ -48,7 +55,7 @@ function Game(options){
     $('.ralphbox').each(function(){
       $(this).removeClass("ralph");
       $(this).removeClass("ralph-wrecking");
-      if($(this).attr("data-column") == self.ralph.row){
+      if($(this).attr("data-column") == self.ralph.column){
 
         $(this).addClass("ralph-wrecking");
       }
@@ -59,9 +66,10 @@ function Game(options){
 
 
   this.printBuilding = function(){
+    $('.building').empty();
     var buildingBody = "";
     for(i = 0; i < this.building.windows.length; i++){
-      buildingBody += '<div class ="window" data-state="new" data-row="'+ this.building.windows[i].row +'" data-column ="'+ this.building.windows[i].column +'"></div>';
+      buildingBody += '<div class ="window" data-state="'+ this.building.windows[i].health +'" data-row="'+ this.building.windows[i].row +'" data-column ="'+ this.building.windows[i].column +'"></div>';
     }
     $('.building').prepend(buildingBody);
   };

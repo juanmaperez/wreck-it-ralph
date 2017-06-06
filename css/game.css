@@ -81,7 +81,9 @@ body{
 
 
 .building{
-  padding:0px 10px !important;
+  height: 312px;
+  padding: 0px 10px !important;
+  display: block;
 }
 .window {
   background-color: #000 !important;
@@ -93,13 +95,13 @@ body{
   margin:0px;
 }
 
-div[data-state ="new"]{
+div[data-state ="2"]{
   background:url('../images/new.png') center center no-repeat;
 }
-div[data-state ="broken"]{
+div[data-state ="1"]{
   background:url('../images/broken.png') center center no-repeat;
 }
-div[data-state ="over"]{
+div[data-state ="0"]{
   background:url('../images/over.png') center center no-repeat;
 }
 
