@@ -41,9 +41,12 @@ body{
 .ralph{
   background:url('../images/ralph.png') bottom center no-repeat;
   background-size:100%;
-
 }
 
+.ralph-wrecking{
+  background:url('../images/ralph-wrecking.png') bottom center no-repeat;
+  background-size:100%;
+}
 /* ------- zona top (Aquí no pasa nada) ---------*/
 
 

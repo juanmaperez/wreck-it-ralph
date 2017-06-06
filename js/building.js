@@ -11,13 +11,6 @@ function Building(){
       }
   };
 
-  this.printBuilding = function(){
-    var buildingBody = "";
-    for(i = 0; i < this.windows.length; i++){
-      buildingBody += '<div class ="window" data-state="new" data-row="'+ this.windows[i].row +'" data-column ="'+ this.windows[i].column +'"></div>';
-    }
-    $('.building').prepend(buildingBody);
-  };
 
 }
 
