@@ -5,7 +5,7 @@ function Game(options){
   this.ralph = options.ralph;
   this.building = options.building;
 
-  this.timeByMove = 900;
+  this.timeByMove = 1200;
 
 
 
@@ -13,7 +13,7 @@ function Game(options){
     this.building.createBuilding();
     this.printBuilding();
 
-    this.ralph.createRalphSpace();
+    this.createRalphSpace();
   };
 
 
@@ -22,9 +22,11 @@ function Game(options){
 
   this.update = function(totalByMove){
     this.printRalphWrecking();
-    this.printBuilding();
 
     this.building.selectWindow(this.ralph.column);
+
+    this.printBuilding();
+
 
     var self = this;
     setTimeout(function(){
@@ -34,6 +36,16 @@ function Game(options){
 
 
   };
+
+
+  this.createRalphSpace = function(){
+    var ralphSpace = "";
+    for(i = 0; i < 5; i++){
+      ralphSpace += '<div class="ralphbox" data-column="' + i + '"></div>';
+    }
+    $('.ralphspace').prepend(ralphSpace);
+  };
+
 
 
   this.printRalph = function(){
@@ -78,8 +90,8 @@ function Game(options){
 
   this.intervalID = setInterval(function(){
     var self = this;
-    self.update(800);
-  }.bind(this),800);
+    self.update(this.timeByMove);
+  }.bind(this),this.timeByMove);
 
 }
 
