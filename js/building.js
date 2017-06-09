@@ -12,12 +12,10 @@ function Building(){
   };
 
 
-  this.selectWindow = function(column){
-    var random = Math.floor(Math.random()*4);
+  this.selectWindow = function(column, row = Math.floor(Math.random()*4)){
     for(i=0; i < this.windows.length; i++){
-      if(this.windows[i].column == column && this.windows[i].row == random){
-        this.windows[i].receiveDamage();
-
+      if(this.windows[i].column == column && this.windows[i].row == row){
+        return this.windows[i];
       }
     }
   };
@@ -33,6 +31,7 @@ function Window(row, column){
   this.health = 2;
   this.row = row;
   this.column = column;
+  this.isFixer = "out";
 
   this.receiveDamage = function(){
     if(this.health > 0){
@@ -47,15 +46,24 @@ function Window(row, column){
     }
   };
 
+  this.addFixer = function(){
+    console.log("hola");
+    this.isFixer = "in";
+  };
+
+  this.removeFixer = function(){
+    this.isFixer = "out";
+  };
+
   this.testHealth = function(){
     switch(this.health){
       case 1:
-        $('.window').attrRemove("data-state");
+        $('.window').removeAttr("data-state");
         $('.window').attr("data-state", "broken");
         break;
 
       case 0:
-        $('.window').attrRemove("data-state");
+        $('.window').removeAttr("data-state");
         $('.window').attr("data-state", "over");
         break;
     }

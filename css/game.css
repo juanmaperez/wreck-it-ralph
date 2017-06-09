@@ -70,9 +70,9 @@ body{
 
 .fixer{
   position: relative;
-  left:-100px;
-  width:20%;
-  height:127px;
+  width:70px;
+  z-index:1000;
+  height:80px;
   background:url('../images/felix.png') bottom center no-repeat;
   background-size:100%;
 }
@@ -93,6 +93,7 @@ body{
   background-size:cover !important;
   padding:0px;
   margin:0px;
+  position:relative;
 }
 
 div[data-state ="2"]{
@@ -102,6 +103,11 @@ div[data-state ="1"]{
   background:url('../images/broken.png') center center no-repeat;
 }
 div[data-state ="0"]{
+  background:url('../images/over.png') center center no-repeat;
+}
+
+
+div[data-fixer ="in"]{
   background:url('../images/over.png') center center no-repeat;
 }
 

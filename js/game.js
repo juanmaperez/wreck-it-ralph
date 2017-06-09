@@ -4,6 +4,7 @@ function Game(options){
 
   this.ralph = options.ralph;
   this.building = options.building;
+  this.fixer = options.fixer;
 
   this.timeByMove = 1200;
 
@@ -14,6 +15,7 @@ function Game(options){
     this.printBuilding();
 
     this.createRalphSpace();
+
   };
 
 
@@ -23,7 +25,7 @@ function Game(options){
   this.update = function(totalByMove){
     this.printRalphWrecking();
 
-    this.building.selectWindow(this.ralph.column);
+    this.building.selectWindow(this.ralph.column).receiveDamage();
 
     this.printBuilding();
 
@@ -76,14 +78,47 @@ function Game(options){
 
 
 
+  this.printFixer = function(){
+    $('.fixer').remove();
+    console.log(this.building.selectWindow(this.fixer.column, this.fixer.row));
+    this.building.selectWindow(this.fixer.column, this.fixer.row).addFixer();
+    $('div[data-fix="in"]').append('<div class="fixer"></div>');
+  };
+
+  this.assignControlsToKeys = function(){
+    $('body').on('keydown', function(e) {
+      switch (e.keyCode) {
+        case 87: // arrow up
+          this.fixer.goUp();
+          break;
+        case 83: // arrow down
+          this.fixer.goDown();
+          break;
+        case 65: // arrow left
+          this.fixer.goLeft();
+          break;
+        case 68: // arrow right
+          this.fixer.goRight();
+          break;
+        case 80:
+          this.fixer.fix();
+          this.building.receiveHealth();
+         break;
+      }
+    }.bind(this));
+  };
+
+
 
   this.printBuilding = function(){
     $('.building').empty();
     var buildingBody = "";
     for(i = 0; i < this.building.windows.length; i++){
-      buildingBody += '<div class ="window" data-state="'+ this.building.windows[i].health +'" data-row="'+ this.building.windows[i].row +'" data-column ="'+ this.building.windows[i].column +'"></div>';
+      buildingBody += '<div class ="window" data-state="'+ this.building.windows[i].health +'" data-row="'+ this.building.windows[i].row +'" data-column="'+ this.building.windows[i].column +'" data-fix="'+ this.building.windows[i].isFixer +'"></div>';
     }
     $('.building').prepend(buildingBody);
+    this.printFixer();
+
   };
 
 
@@ -98,6 +133,7 @@ function Game(options){
 var options = {
   ralph: new Ralph(),
   building: new Building(),
+  fixer : new Fixer(),
 };
 
 var game = new Game(options);
