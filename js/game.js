@@ -6,13 +6,14 @@ function Game(options){
   this.building = options.building;
   this.fixer = options.fixer;
 
-  this.timeByMove = 1200;
+  this.timeByMove = 700;
 
 
 
   this.loadGame = function(){
     this.building.createBuilding();
     this.printBuilding();
+    this.assignControlsToKeys();
 
     this.createRalphSpace();
 
@@ -20,22 +21,19 @@ function Game(options){
 
 
 
+  this.updateBuilding = function(){
+      this.printBuilding();
+  };
 
+  this.update = function(){
 
-  this.update = function(totalByMove){
     this.printRalphWrecking();
-
     this.building.selectWindow(this.ralph.column).receiveDamage();
-
-    this.printBuilding();
-
 
     var self = this;
     setTimeout(function(){
       self.printRalph();
     },400);
-
-
 
   };
 
@@ -80,9 +78,9 @@ function Game(options){
 
   this.printFixer = function(){
     $('.fixer').remove();
-    console.log(this.building.selectWindow(this.fixer.column, this.fixer.row));
+    //console.log(this.building.selectWindow(this.fixer.column, this.fixer.row));
     this.building.selectWindow(this.fixer.column, this.fixer.row).addFixer();
-    $('div[data-fix="in"]').append('<div class="fixer"></div>');
+    $('div[data-fix="in"]').append('<div class="fixer nofixing"></div>');
   };
 
   this.assignControlsToKeys = function(){
@@ -90,19 +88,27 @@ function Game(options){
       switch (e.keyCode) {
         case 87: // arrow up
           this.fixer.goUp();
+          this.printFixer();
           break;
         case 83: // arrow down
           this.fixer.goDown();
+          this.printFixer();
+
           break;
         case 65: // arrow left
           this.fixer.goLeft();
+          this.printFixer();
+
           break;
         case 68: // arrow right
           this.fixer.goRight();
+          this.printFixer();
+
           break;
-        case 80:
-          this.fixer.fix();
-          this.building.receiveHealth();
+        case 70:
+          this.building.selectWindow(this.fixer.column, this.fixer.row).receiveHealth();
+          this.fixer.fixing();
+
          break;
       }
     }.bind(this));
@@ -114,6 +120,9 @@ function Game(options){
     $('.building').empty();
     var buildingBody = "";
     for(i = 0; i < this.building.windows.length; i++){
+      if(this.building.windows[i].row != this.fixer.row || this.building.windows[i].column != this.fixer.column){
+        this.building.windows[i].removeFixer();
+      }
       buildingBody += '<div class ="window" data-state="'+ this.building.windows[i].health +'" data-row="'+ this.building.windows[i].row +'" data-column="'+ this.building.windows[i].column +'" data-fix="'+ this.building.windows[i].isFixer +'"></div>';
     }
     $('.building').prepend(buildingBody);
@@ -122,8 +131,12 @@ function Game(options){
   };
 
 
+  this.intervalBuilding = setInterval(function(){
+    var self = this;
+    self.updateBuilding();
+  }.bind(this),60);
 
-  this.intervalID = setInterval(function(){
+  this.intervalRalph = setInterval(function(){
     var self = this;
     self.update(this.timeByMove);
   }.bind(this),this.timeByMove);

@@ -47,7 +47,6 @@ function Window(row, column){
   };
 
   this.addFixer = function(){
-    console.log("hola");
     this.isFixer = "in";
   };
 

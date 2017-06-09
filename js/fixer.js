@@ -19,5 +19,11 @@ function Fixer(){
   };
 
 
+  this.fixing = function(){
+    console.log("hola");
+      $('.fixer').toggleClass("nofixing");
+      $('.fixer').toggleClass("fixing");
+  };
+
 
 }
