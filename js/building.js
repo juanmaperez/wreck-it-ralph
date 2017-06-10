@@ -21,6 +21,24 @@ function Building(){
   };
 
 
+  this.windowsInColumn = function(column){
+    var totalHealth = 0;
+    for(i=0; i < this.windows.length; i++){
+      if(this.windows[i].column == column){
+        totalHealth += this.windows[i].health;
+      }
+    }
+    return totalHealth;
+  };
+
+  this.calculatePoints = function(){
+    var totalPoints = 0;
+    for(i=0; i < this.windows.length; i++){
+        totalPoints += this.windows[i].health;
+    }
+    return totalPoints;
+
+  };
 
 }
 
