@@ -1,7 +1,7 @@
 
 body{
   background:#333;
-  padding:170px;
+  padding:170px 0px !important;
   background:url('../images/rompe-logo.png') center 20px #333 no-repeat;
   background-size:150px;
   }
@@ -188,17 +188,25 @@ div[data-fixer ="in"]{
 .gameover, .youwin{
   display:none;
   position:absolute;
-  width:200px;
+  width:600px;
   z-index:100000;
   margin-top:100px;
   height:auto;
   left:50%;
-  margin-left:-100px
+  margin-left:-300px
+}
+
+.gameover a, .youwin a{
+  display: block;
+  width:100%;
+  position: relative;
 }
 
 .gameover img, .youwin img{
   height:auto;
+  width:100;
   position:relative;
+  left:0px
 }
 
 

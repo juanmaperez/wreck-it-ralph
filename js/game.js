@@ -53,7 +53,7 @@ function Game(options){
 /*================ Funciones de puntuación =================*/
 
 this.assignPoints = function(){
-  this.points = this.building.calculatePoints()-10;
+  this.points = (this.building.calculatePoints()-15)*100;
 };
 
 this.printPoints = function(){
@@ -206,10 +206,10 @@ this.printTime = function(){
         self.printTime();
       }else{
         self.stop();
-        if(this.points < 10){
-          $('.gameover').fadeIn();
+        if(this.points <= 0){
+          $('.gameover').css("display", "block");
         }else{
-          $('.youwin').fadeIn();
+          $('.youwin').css("display", "block");
         }
       }
     }.bind(this),1000);

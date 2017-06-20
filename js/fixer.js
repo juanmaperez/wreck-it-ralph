@@ -28,7 +28,6 @@ function Fixer(){
     }
   };
 
-
   this.fixing = function(){
       $('.fixer').toggleClass("nofixing");
       $('.fixer').toggleClass("fixing");
