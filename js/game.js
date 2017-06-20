@@ -107,6 +107,9 @@ this.printTime = function(){
       if($(this).attr("data-column") == self.ralph.column){
 
         $(this).addClass("ralph-wrecking");
+        //new buzz.sound("assets/sounds/crash.wav").setVolume(3).play();
+        //new buzz.sound("assets/sounds/glass-break.wav").setVolume(20).play();
+
       }
     });
   };
