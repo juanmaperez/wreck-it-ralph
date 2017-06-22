@@ -12,7 +12,10 @@ function Building(){
   };
 
 
-  this.selectWindow = function(column, row = Math.floor(Math.random()*4)){
+  this.selectWindow = function(column, row){
+    if(row == undefined){
+      row = Math.floor(Math.random()*4);
+    }
     for(i=0; i < this.windows.length; i++){
       if(this.windows[i].column == column && this.windows[i].row == row){
         return this.windows[i];
